@@ -1,7 +1,8 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { getArticles } from "../api";
 
-export const Articles = ({ articles, setArticles }) => {
+export const Articles = () => {
+  const [articles, setArticles] = useState([]);
   useEffect(() => {
     getArticles().then((articles) => {
       setArticles(articles.data.articles);
