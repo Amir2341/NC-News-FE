@@ -1,16 +1,27 @@
 import { useEffect, useState } from "react";
-import { getArticles } from "../api";
+import { useParams } from "react-router-dom";
+import { getArticles, getArticlesByTopic } from "../api";
+import Topic from "./Topic";
 
 export const Articles = () => {
   const [articles, setArticles] = useState([]);
+  const { topic } = useParams();
+
   useEffect(() => {
-    getArticles().then((articles) => {
-      setArticles(articles.data.articles);
-    });
-  }, []);
-  console.log(articles);
+    if (!topic) {
+      getArticles().then((articles) => {
+        setArticles(articles.data.articles);
+      });
+    } else {
+      getArticlesByTopic(topic).then((articles) => {
+        setArticles(articles.data.articles);
+      });
+    }
+  }, [topic]);
+
   return (
     <section>
+      <Topic />
       <ul>
         {articles.map((article) => {
           return (
