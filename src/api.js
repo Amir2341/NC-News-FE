@@ -15,7 +15,17 @@ export const getTopics = () => {
 };
 
 export const getArticlesByTopic = (topic) => {
-  return axios.get(
-    `https://nc-news20.herokuapp.com/api/articles/?topic=${topic}`
-  );
+  return axios
+    .get(`https://nc-news20.herokuapp.com/api/articles/?topic=${topic}`)
+    .then((res) => {
+      return res;
+    });
+};
+
+export const getArticleById = (article_id) => {
+  return axios
+    .get(`https://nc-news20.herokuapp.com/api/articles/${article_id}`)
+    .then((res) => {
+      return res;
+    });
 };

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getArticles, getArticlesByTopic } from "../api";
+import { Link } from "react-router-dom";
 import Topic from "./Topic";
 
 export const Articles = () => {
@@ -26,7 +27,9 @@ export const Articles = () => {
         {articles.map((article) => {
           return (
             <div key={article.article_id}>
-              <h2>{article.title}</h2>
+              <Link to={`articles/${article.article_id}`}>
+                <h2>{article.title}</h2>
+              </Link>
               <h4>{article.author}</h4>
               <li>topic: {article.topic}</li>
               <li>created at: {article.created_at}</li>

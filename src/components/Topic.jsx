@@ -10,12 +10,9 @@ const Topic = () => {
       setTopics(topic.data.topics);
     });
   }, []);
-  console.log(topics);
+
   return (
     <>
-      <Link to="/">
-        <button>home</button>
-      </Link>
       {topics.map((topic) => {
         return (
           <Link key={topic.slug} to={`/${topic.slug}`}>
