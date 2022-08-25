@@ -24,10 +24,11 @@ export const getArticleById = (article_id) => {
 };
 
 export const addVotes = (article_id, inc_votes) => {
-  return axios.patch(
-    `https://nc-news20.herokuapp.com/api/articles/${article_id} `,
-    {
+  return axios
+    .patch(`https://nc-news20.herokuapp.com/api/articles/${article_id} `, {
       inc_votes,
-    }
-  );
+    })
+    .then((res) => {
+      return res;
+    });
 };

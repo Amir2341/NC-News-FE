@@ -21,32 +21,19 @@ export const SingleArticle = ({ isLoading, setIsLoading }) => {
       });
   }, [article_id]);
 
-  const incrementVotes = () => {
-    setVotes((prevVotes) => {
-      return prevVotes + 1;
-    });
-    addVotes(article_id, 1)
-      .then((article) => {})
+  const incrementVotes = (inc_votes) => {
+    setVotes(votes + inc_votes);
+    addVotes(article_id, inc_votes)
+      .then((article) => {
+        setVotes(0);
+        setSingleArticle(article.data.article);
+      })
       .catch((err) => {
-        console.log(err);
-        setVotes((prevVotes) => {
-          return prevVotes - 1;
-        });
+        setVotes(0);
+        setExistingError(err.response.data);
       });
   };
-  const decrementVotes = () => {
-    setVotes((prevVotes) => {
-      return prevVotes - 1;
-    });
-    addVotes(article_id, -1)
-      .then((article) => {})
-      .catch((err) => {
-        console.log(err);
-        setVotes((prevVotes) => {
-          return prevVotes + 1;
-        });
-      });
-  };
+
   if (existingError) return <Error error={"404 : Not Found"} />;
   if (isLoading) {
     return <p>Loading...</p>;
@@ -60,8 +47,20 @@ export const SingleArticle = ({ isLoading, setIsLoading }) => {
           comments: {singleArticle.comment_count}, votes:
           {singleArticle.votes + votes}
         </h5>
-        <button onClick={incrementVotes}>like</button>
-        <button onClick={decrementVotes}>dislike</button>
+        <button
+          onClick={() => {
+            incrementVotes(1);
+          }}
+        >
+          like
+        </button>
+        <button
+          onClick={() => {
+            incrementVotes(-1);
+          }}
+        >
+          dislike
+        </button>
 
         <h5>
           {singleArticle.topic} | {singleArticle.created_at}
