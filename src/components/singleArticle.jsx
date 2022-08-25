@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getArticleById, addVotes } from "../api";
 import Error from "../error";
+import { Comments } from "./comments";
 
 export const SingleArticle = ({ isLoading, setIsLoading }) => {
   const [singleArticle, setSingleArticle] = useState([]);
@@ -43,10 +44,7 @@ export const SingleArticle = ({ isLoading, setIsLoading }) => {
         <h2>{singleArticle.title}</h2>
         <h4>{singleArticle.author}</h4>
         <p>{singleArticle.body}</p>
-        <h5>
-          comments: {singleArticle.comment_count}, votes:
-          {singleArticle.votes + votes}
-        </h5>
+        <h5>votes: {singleArticle.votes + votes}</h5>
         <button
           onClick={() => {
             incrementVotes(1);
@@ -65,6 +63,7 @@ export const SingleArticle = ({ isLoading, setIsLoading }) => {
         <h5>
           {singleArticle.topic} | {singleArticle.created_at}
         </h5>
+        <Comments />
       </section>
     );
   }
