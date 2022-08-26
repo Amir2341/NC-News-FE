@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { getCommentsById } from "../api";
 import { useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export const Comments = () => {
   const [comments, setComments] = useState([]);
@@ -15,6 +16,9 @@ export const Comments = () => {
   return (
     <section>
       <h4>Comments:</h4>
+      <Link to={`/articles/${article_id}/comments`}>
+        <button>post comment</button>
+      </Link>
       <ul>
         {comments.map((comment) => {
           return (
