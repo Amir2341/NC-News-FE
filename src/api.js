@@ -48,3 +48,11 @@ export const addCommentbyId = (article_id, newComment) => {
     newComment
   );
 };
+
+export const deleteCommentById = (comment_id) => {
+  return axios
+    .delete(`https://nc-news20.herokuapp.com/api/comments/${comment_id}`)
+    .then((res) => {
+      return res;
+    });
+};
