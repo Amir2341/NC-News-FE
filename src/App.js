@@ -7,12 +7,6 @@ import { useState } from "react";
 import { PostComment } from "./components/postcomment";
 
 function App() {
-  const [loggedInUser, setLoggedInUser] = useState({
-    username: "tickle122",
-    name: "Tom Tickle",
-    avatar_url:
-      "https://vignette.wikia.nocookie.net/mrmen/images/d/d6/Mr-Tickle-9a.png/revision/latest?cb=20180127221953",
-  });
   const [isLoading, setIsLoading] = useState(true);
   return (
     <BrowserRouter>

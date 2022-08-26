@@ -8,9 +8,11 @@ export const PostComment = () => {
     body: "",
     username: "tickle122",
   });
+  const [submit, setSubmit] = useState(false);
   const { article_id } = useParams();
 
   const handleChange = (event, inputName) => {
+    setSubmit(false);
     setNewComment((currentComments) => {
       const commentCopy = { ...currentComments };
       commentCopy[inputName] = event.target.value;
@@ -19,14 +21,16 @@ export const PostComment = () => {
   };
   const handleSubmit = (event) => {
     event.preventDefault();
-    setNewComment((prevComment) => {
-      const prevCopy = { ...prevComment };
-      const addingComment = { ...prevCopy, newComment };
-      return addingComment;
-    });
 
-    addCommentbyId(article_id, newComment);
+    addCommentbyId(article_id, newComment).then(() => {
+      setSubmit(true);
+      setNewComment({
+        body: "",
+        username: "tickle122",
+      });
+    });
   };
+
   return (
     <>
       <Link to={`/articles/${article_id}`}>
@@ -40,9 +44,13 @@ export const PostComment = () => {
           }}
           required
           type="text"
-        ></input>
-        <input type="submit" value="Submit" onSubmit={handleSubmit}></input>
+          value={newComment.body}
+        />
+        <button type="submit" onSubmit={handleSubmit}>
+          submit
+        </button>
       </form>
+      {submit ? <h2>comment successful</h2> : <></>}
     </>
   );
 };
