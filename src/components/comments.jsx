@@ -1,21 +1,37 @@
 import { useEffect, useState } from "react";
-import { getCommentsById } from "../api";
+import { deleteCommentById, getCommentsById } from "../api";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 
 export const Comments = () => {
   const [comments, setComments] = useState([]);
   const { article_id } = useParams();
-
+  const [isDeleted, setIsDeleted] = useState(false);
   useEffect(() => {
     getCommentsById(article_id).then((comments) => {
       setComments(comments.data.comments);
     });
   }, [article_id]);
 
+  const deleteComment = (comment_id) => {
+    setComments((currComments) => {
+      return currComments.filter((comment) => {
+        return comment.comment_id !== comment_id;
+      });
+    });
+    deleteCommentById(comment_id)
+      .then(() => {
+        setIsDeleted(true);
+      })
+      .catch(() => {
+        setIsDeleted(false);
+      });
+  };
+
   return (
     <section>
       <h4>Comments:</h4>
+      {isDeleted ? <p>comment deleted</p> : <></>}
       <Link to={`/articles/${article_id}/comments`}>
         <button>post comment</button>
       </Link>
@@ -28,6 +44,11 @@ export const Comments = () => {
               </h6>
               <p>{comment.body}</p>
               <h6>votes: {comment.votes}</h6>
+              {comment.author === "tickle122" ? (
+                <button onClick={() => deleteComment(comment.comment_id)}>
+                  delete comment
+                </button>
+              ) : null}
             </div>
           );
         })}
