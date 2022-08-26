@@ -1,6 +1,7 @@
 import axios from "axios";
 
 export const getArticles = (topic) => {
+  console.log(topic);
   return axios
     .get("https://nc-news20.herokuapp.com/api/articles", { params: { topic } })
     .then((res) => {
@@ -38,11 +39,4 @@ export const getCommentsById = (article_id) => {
     .then((res) => {
       return res;
     });
-};
-
-export const addCommentbyId = (article_id, newComment) => {
-  return axios.post(
-    `https://nc-news20.herokuapp.com/api/articles/${article_id}/comments`,
-    newComment
-  );
 };
