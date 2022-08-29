@@ -5,7 +5,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { SingleArticle } from "./components/singleArticle";
 import { useState } from "react";
 import { PostComment } from "./components/postcomment";
-
+import { NotFound } from "./components/notfound";
 function App() {
   const [isLoading, setIsLoading] = useState(true);
   return (
@@ -13,8 +13,18 @@ function App() {
       <div>
         <Title />
         <Routes>
-          <Route path="/" element={<Articles />} />
-          <Route path="/:topic" element={<Articles />} />
+          <Route
+            path="/"
+            element={
+              <Articles isLoading={isLoading} setIsLoading={setIsLoading} />
+            }
+          />
+          <Route
+            path="/articles/topic/:topic"
+            element={
+              <Articles isLoading={isLoading} setIsLoading={setIsLoading} />
+            }
+          />
           <Route
             path="/articles/:article_id"
             element={
@@ -28,6 +38,7 @@ function App() {
             path="articles/:article_id/comments"
             element={<PostComment />}
           />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </div>
     </BrowserRouter>
