@@ -4,7 +4,7 @@ export const Title = () => {
   return (
     <>
       <Link to="/">
-        <h1>NC NEWS</h1>
+        <h1>NC NEWS </h1>
       </Link>
     </>
   );
