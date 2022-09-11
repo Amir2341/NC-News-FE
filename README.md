@@ -16,7 +16,7 @@ Link to backend repository on [github](https://github.com/Amir2341/NC-news-proje
 
 1. Clone the repository from github
 
-   `git clone https://github.com/Amir2341/NC-news-project.git`
+   `git clone https://github.com/Amir2341/NC-News-FE.git`
 
 2. Install dependancies
 
