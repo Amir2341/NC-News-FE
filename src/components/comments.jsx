@@ -33,7 +33,7 @@ export const Comments = () => {
       <h4>Comments:</h4>
       {isDeleted ? <p>comment deleted</p> : <></>}
       <Link to={`/articles/${article_id}/comments`}>
-        <button>post comment</button>
+        <button className="btn-post">post comment</button>
       </Link>
       <ul>
         {comments.map((comment) => {
@@ -45,7 +45,10 @@ export const Comments = () => {
               <p>{comment.body}</p>
               <h6>votes: {comment.votes}</h6>
               {comment.author === "tickle122" ? (
-                <button onClick={() => deleteComment(comment.comment_id)}>
+                <button
+                  className="btn-delete"
+                  onClick={() => deleteComment(comment.comment_id)}
+                >
                   delete comment
                 </button>
               ) : null}

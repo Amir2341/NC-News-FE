@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { getArticleById, addVotes } from "../api";
 import Error from "../error";
 import { Comments } from "./comments";
+import { AiFillLike, AiFillDislike } from "react-icons/ai";
 
 export const SingleArticle = ({ isLoading, setIsLoading }) => {
   const [singleArticle, setSingleArticle] = useState([]);
@@ -40,26 +41,29 @@ export const SingleArticle = ({ isLoading, setIsLoading }) => {
     return <p>Loading...</p>;
   } else {
     return (
-      <section>
+      <section className="article__container">
         <h2>{singleArticle.title}</h2>
         <h4>{singleArticle.author}</h4>
         <p>{singleArticle.body}</p>
         <h5>votes: {singleArticle.votes + votes}</h5>
-        <button
-          onClick={() => {
-            incrementVotes(1);
-          }}
-        >
-          like
-        </button>
-        <button
-          onClick={() => {
-            incrementVotes(-1);
-          }}
-        >
-          dislike
-        </button>
-
+        <div>
+          <button
+            className="like-btn"
+            onClick={() => {
+              incrementVotes(1);
+            }}
+          >
+            <AiFillLike className="btn-fill" />
+          </button>
+          <button
+            className="dislike-btn"
+            onClick={() => {
+              incrementVotes(-1);
+            }}
+          >
+            <AiFillDislike className="btn-fill" />
+          </button>
+        </div>
         <h5>
           {singleArticle.topic} | {singleArticle.created_at}
         </h5>

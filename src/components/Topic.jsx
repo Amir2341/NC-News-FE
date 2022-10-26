@@ -16,7 +16,9 @@ const Topic = () => {
       {topics.map((topic) => {
         return (
           <Link key={topic.slug} to={`/articles/topic/${topic.slug}`}>
-            <button value={topic.slug}>{topic.slug}</button>
+            <button className="topic-btn" value={topic.slug}>
+              {topic.slug}
+            </button>
           </Link>
         );
       })}

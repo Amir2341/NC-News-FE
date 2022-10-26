@@ -34,21 +34,30 @@ export const PostComment = () => {
   return (
     <>
       <Link to={`/articles/${article_id}`}>
-        <button>back</button>
+        <button className="back-btn">back</button>
       </Link>
       <form onSubmit={handleSubmit}>
-        <label>type comment here:</label>
-        <input
-          onChange={(event) => {
-            handleChange(event, "body");
-          }}
-          required
-          type="text"
-          value={newComment.body}
-        />
-        <button type="submit" onSubmit={handleSubmit}>
-          submit
-        </button>
+        <label>Comment:</label>
+        <div>
+          <input
+            className="comment-box"
+            onChange={(event) => {
+              handleChange(event, "body");
+            }}
+            required
+            type="text"
+            value={newComment.body}
+          />
+          <div className="submit-btn__container">
+            <button
+              className="submit-btn"
+              type="submit"
+              onSubmit={handleSubmit}
+            >
+              submit
+            </button>
+          </div>
+        </div>
       </form>
       {submit ? <h2>comment successful</h2> : <></>}
     </>

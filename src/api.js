@@ -56,3 +56,9 @@ export const deleteCommentById = (comment_id) => {
       return res;
     });
 };
+
+export const getUsers = () => {
+  return axios.get("https://nc-news20.herokuapp.com/api/users").then((res) => {
+    return res.data;
+  });
+};

@@ -35,36 +35,44 @@ export const Articles = ({ isLoading, setIsLoading }) => {
     return <p>Loading...</p>;
   } else {
     return (
-      <section>
-        <Topic />
-        sort by:
-        <select value={order} onChange={handleOrder}>
-          <option value="asc">ascending</option>
-          <option value="desc">descending</option>
-        </select>
-        <select value={sort} onChange={handleSort}>
-          <option value="created_at">date</option>
-          <option value="votes">votes</option>
-          <option value="comment_count">comments</option>
-          <option value="title">title</option>
-          <option value="author">author</option>
-        </select>
-        <ul className="article-list">
-          {articles.map((article) => {
-            return (
-              <div key={article.article_id}>
-                <Link to={`/articles/${article.article_id}`}>
-                  <h2>{article.title}</h2>
-                </Link>
-                <h4>{article.author}</h4>
-                <li>topic: {article.topic}</li>
-                <li>created at: {article.created_at}</li>
-                <li>votes: {article.votes}</li>
-                <li>comment count: {article.comment_count}</li>
-              </div>
-            );
-          })}
-        </ul>
+      <section className="articles__container">
+        <div className="articles__container-select">
+          <Topic />
+          <div>
+            {" "}
+            Order By:
+            <select value={order} onChange={handleOrder}>
+              <option value="asc">ascending</option>
+              <option value="desc">descending</option>
+            </select>{" "}
+            Sort By:
+            <select value={sort} onChange={handleSort}>
+              <option value="created_at">date</option>
+              <option value="votes">votes</option>
+              <option value="comment_count">comments</option>
+              <option value="title">title</option>
+              <option value="author">author</option>
+            </select>
+          </div>
+        </div>
+        <article className="articles-card">
+          <ul className="articles-list">
+            {articles.map((article) => {
+              return (
+                <div key={article.article_id}>
+                  <Link to={`/articles/${article.article_id}`}>
+                    <h2>{article.title}</h2>
+                  </Link>
+                  <h4>{article.author}</h4>
+                  <li>topic: {article.topic}</li>
+                  <li>created at: {article.created_at}</li>
+                  <li>votes: {article.votes}</li>
+                  <li>comment count: {article.comment_count}</li>
+                </div>
+              );
+            })}
+          </ul>
+        </article>
       </section>
     );
   }
