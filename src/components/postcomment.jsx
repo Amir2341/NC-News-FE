@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { addCommentbyId } from "../api";
 import { Link } from "react-router-dom";
+import { Button, TextField, Alert } from "@mui/material";
 
 export const PostComment = () => {
   const [newComment, setNewComment] = useState({
@@ -34,32 +35,29 @@ export const PostComment = () => {
   return (
     <>
       <Link to={`/articles/${article_id}`}>
-        <button className="back-btn">back</button>
+        <Button variant="outlined">back</Button>
       </Link>
       <form onSubmit={handleSubmit}>
-        <label>Comment:</label>
         <div>
-          <input
-            className="comment-box"
+          <TextField
+            label="Comment here"
+            placeholder="Placeholder"
+            multiline
             onChange={(event) => {
               handleChange(event, "body");
             }}
             required
             type="text"
             value={newComment.body}
-          />
+          ></TextField>
           <div className="submit-btn__container">
-            <button
-              className="submit-btn"
-              type="submit"
-              onSubmit={handleSubmit}
-            >
+            <Button variant="outlined" type="submit" onSubmit={handleSubmit}>
               submit
-            </button>
+            </Button>
           </div>
         </div>
       </form>
-      {submit ? <h2>comment successful</h2> : <></>}
+      {submit ? <Alert severity="success">comment successful</Alert> : <></>}
     </>
   );
 };

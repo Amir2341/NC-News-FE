@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { deleteCommentById, getCommentsById } from "../api";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
+import { Button, Alert, Card, CardContent, Typography } from "@mui/material";
 
 export const Comments = () => {
   const [comments, setComments] = useState([]);
@@ -31,28 +32,37 @@ export const Comments = () => {
   return (
     <section>
       <h4>Comments:</h4>
-      {isDeleted ? <p>comment deleted</p> : <></>}
+      {isDeleted ? <Alert severity="success">comment deleted</Alert> : <></>}
       <Link to={`/articles/${article_id}/comments`}>
-        <button className="btn-post">post comment</button>
+        <Button variant="outlined" size="small">
+          post comment
+        </Button>
       </Link>
       <ul>
         {comments.map((comment) => {
           return (
-            <div key={comment.comment_id}>
-              <h6>
-                {comment.author} | {comment.created_at}
-              </h6>
-              <p>{comment.body}</p>
-              <h6>votes: {comment.votes}</h6>
-              {comment.author === "tickle122" ? (
-                <button
-                  className="btn-delete"
-                  onClick={() => deleteComment(comment.comment_id)}
-                >
-                  delete comment
-                </button>
-              ) : null}
-            </div>
+            <Card
+              sx={{ minWidth: 100, mb: -5, mx: -6, transform: "scale(0.8)" }}
+              variant="outlined"
+              key={comment.comment_id}
+            >
+              <CardContent>
+                <h6>
+                  {comment.author} | {comment.created_at}
+                </h6>
+                <Typography>{comment.body}</Typography>
+                <h6>votes: {comment.votes}</h6>
+                {comment.author === "tickle122" ? (
+                  <Button
+                    variant="outlined"
+                    size="small"
+                    onClick={() => deleteComment(comment.comment_id)}
+                  >
+                    delete comment
+                  </Button>
+                ) : null}
+              </CardContent>
+            </Card>
           );
         })}
       </ul>

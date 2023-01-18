@@ -18,37 +18,39 @@ function App() {
 
   return (
     <BrowserRouter>
-      <div className="App">
-        <Title />
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <Articles isLoading={isLoading} setIsLoading={setIsLoading} />
-            }
-          />
-          <Route
-            path="/articles/topic/:topic"
-            element={
-              <Articles isLoading={isLoading} setIsLoading={setIsLoading} />
-            }
-          />
-          <Route
-            path="/articles/:article_id"
-            element={
-              <SingleArticle
-                isLoading={isLoading}
-                setIsLoading={setIsLoading}
-              />
-            }
-          />
-          <Route
-            path="articles/:article_id/comments"
-            element={<PostComment />}
-          />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </div>
+      <UserContext.Provider value={{ user, setUser }}>
+        <div className="App">
+          <Title />
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <Articles isLoading={isLoading} setIsLoading={setIsLoading} />
+              }
+            />
+            <Route
+              path="/articles/topic/:topic"
+              element={
+                <Articles isLoading={isLoading} setIsLoading={setIsLoading} />
+              }
+            />
+            <Route
+              path="/articles/:article_id"
+              element={
+                <SingleArticle
+                  isLoading={isLoading}
+                  setIsLoading={setIsLoading}
+                />
+              }
+            />
+            <Route
+              path="articles/:article_id/comments"
+              element={<PostComment />}
+            />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </div>
+      </UserContext.Provider>
     </BrowserRouter>
   );
 }

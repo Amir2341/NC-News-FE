@@ -2,7 +2,7 @@ import axios from "axios";
 
 export const getArticles = (topic, order, sort_by) => {
   return axios
-    .get("https://nc-news20.herokuapp.com/api/articles", {
+    .get("https://nc-news.cyclic.app/api/articles", {
       params: { topic, order, sort_by },
     })
     .then((res) => {
@@ -11,14 +11,14 @@ export const getArticles = (topic, order, sort_by) => {
 };
 
 export const getTopics = () => {
-  return axios.get("https://nc-news20.herokuapp.com/api/topics").then((res) => {
+  return axios.get("https://nc-news.cyclic.app/api/topics").then((res) => {
     return res;
   });
 };
 
 export const getArticleById = (article_id) => {
   return axios
-    .get(`https://nc-news20.herokuapp.com/api/articles/${article_id}`)
+    .get(`https://nc-news.cyclic.app/api/articles/${article_id}`)
     .then((res) => {
       return res;
     });
@@ -26,7 +26,7 @@ export const getArticleById = (article_id) => {
 
 export const addVotes = (article_id, inc_votes) => {
   return axios
-    .patch(`https://nc-news20.herokuapp.com/api/articles/${article_id} `, {
+    .patch(`https://nc-news.cyclic.app/api/articles/${article_id} `, {
       inc_votes,
     })
     .then((res) => {
@@ -36,7 +36,7 @@ export const addVotes = (article_id, inc_votes) => {
 
 export const getCommentsById = (article_id) => {
   return axios
-    .get(`https://nc-news20.herokuapp.com/api/articles/${article_id}/comments`)
+    .get(`https://nc-news.cyclic.app/api/articles/${article_id}/comments`)
     .then((res) => {
       return res;
     });
@@ -44,21 +44,21 @@ export const getCommentsById = (article_id) => {
 
 export const addCommentbyId = (article_id, newComment) => {
   return axios.post(
-    `https://nc-news20.herokuapp.com/api/articles/${article_id}/comments`,
+    `https://nc-news.cyclic.app/api/articles/${article_id}/comments`,
     newComment
   );
 };
 
 export const deleteCommentById = (comment_id) => {
   return axios
-    .delete(`https://nc-news20.herokuapp.com/api/comments/${comment_id}`)
+    .delete(`https://nc-news.cyclic.app/api/comments/${comment_id}`)
     .then((res) => {
       return res;
     });
 };
 
 export const getUsers = () => {
-  return axios.get("https://nc-news20.herokuapp.com/api/users").then((res) => {
+  return axios.get("https://nc-news.cyclic.app/api/users").then((res) => {
     return res.data;
   });
 };

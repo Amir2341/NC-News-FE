@@ -5,6 +5,16 @@ import { Link } from "react-router-dom";
 import Topic from "./Topic";
 import Error from "../error";
 
+import {
+  Card,
+  CardContent,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+  Typography,
+} from "@mui/material";
+
 export const Articles = ({ isLoading, setIsLoading }) => {
   const [articles, setArticles] = useState([]);
   const [order, setOrder] = useState("asc");
@@ -35,44 +45,56 @@ export const Articles = ({ isLoading, setIsLoading }) => {
     return <p>Loading...</p>;
   } else {
     return (
-      <section className="articles__container">
+      <section>
         <div className="articles__container-select">
           <Topic />
           <div>
-            {" "}
-            Order By:
-            <select value={order} onChange={handleOrder}>
-              <option value="asc">ascending</option>
-              <option value="desc">descending</option>
-            </select>{" "}
-            Sort By:
-            <select value={sort} onChange={handleSort}>
-              <option value="created_at">date</option>
-              <option value="votes">votes</option>
-              <option value="comment_count">comments</option>
-              <option value="title">title</option>
-              <option value="author">author</option>
-            </select>
+            <FormControl variant="standard" sx={{ m: 1, minWidth: 140 }}>
+              <InputLabel>Order By</InputLabel>
+              <Select value={order} onChange={handleOrder} label="Order By">
+                <MenuItem value="asc">ascending</MenuItem>
+                <MenuItem value="desc">descending</MenuItem>
+              </Select>
+            </FormControl>
+            <FormControl variant="standard" sx={{ m: 1, minWidth: 140 }}>
+              <InputLabel>Sort By</InputLabel>
+              <Select value={sort} onChange={handleSort} label="Sort By">
+                <MenuItem value="created_at">date</MenuItem>
+                <MenuItem value="votes">votes</MenuItem>
+                <MenuItem value="comment_count">comments</MenuItem>
+                <MenuItem value="title">title</MenuItem>
+                <MenuItem value="author">author</MenuItem>
+              </Select>
+            </FormControl>
           </div>
         </div>
-        <article className="articles-card">
-          <ul className="articles-list">
-            {articles.map((article) => {
-              return (
-                <div key={article.article_id}>
+        <div className="articles">
+          {articles.map((article) => {
+            return (
+              <Card
+                sx={{ mx: 1 }}
+                key={article.article_id}
+                className="card"
+                variant="outlined"
+              >
+                <CardContent key={article.article_id}>
                   <Link to={`/articles/${article.article_id}`}>
-                    <h2>{article.title}</h2>
+                    <Typography fontSize={{ fontSize: 20 }}>
+                      {article.title}
+                    </Typography>
                   </Link>
-                  <h4>{article.author}</h4>
-                  <li>topic: {article.topic}</li>
-                  <li>created at: {article.created_at}</li>
-                  <li>votes: {article.votes}</li>
-                  <li>comment count: {article.comment_count}</li>
-                </div>
-              );
-            })}
-          </ul>
-        </article>
+                  <Typography>{article.author}</Typography>
+                  <Typography>topic: {article.topic}</Typography>
+                  <Typography>created at: {article.created_at}</Typography>
+                  <Typography>votes: {article.votes}</Typography>
+                  <Typography>
+                    comment count: {article.comment_count}
+                  </Typography>
+                </CardContent>
+              </Card>
+            );
+          })}
+        </div>
       </section>
     );
   }

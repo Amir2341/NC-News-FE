@@ -4,6 +4,7 @@ import { getArticleById, addVotes } from "../api";
 import Error from "../error";
 import { Comments } from "./comments";
 import { AiFillLike, AiFillDislike } from "react-icons/ai";
+import { Button } from "@mui/material";
 
 export const SingleArticle = ({ isLoading, setIsLoading }) => {
   const [singleArticle, setSingleArticle] = useState([]);
@@ -11,6 +12,7 @@ export const SingleArticle = ({ isLoading, setIsLoading }) => {
   const [existingError, setExistingError] = useState("");
   const { article_id } = useParams();
 
+  const [showComments, setShowComments] = useState(false);
   useEffect(() => {
     getArticleById(article_id)
       .then((article) => {
@@ -42,32 +44,53 @@ export const SingleArticle = ({ isLoading, setIsLoading }) => {
   } else {
     return (
       <section className="article__container">
-        <h2>{singleArticle.title}</h2>
-        <h4>{singleArticle.author}</h4>
-        <p>{singleArticle.body}</p>
-        <h5>votes: {singleArticle.votes + votes}</h5>
-        <div>
-          <button
-            className="like-btn"
-            onClick={() => {
-              incrementVotes(1);
-            }}
-          >
-            <AiFillLike className="btn-fill" />
-          </button>
-          <button
-            className="dislike-btn"
-            onClick={() => {
-              incrementVotes(-1);
-            }}
-          >
-            <AiFillDislike className="btn-fill" />
-          </button>
+        <div className="article__card">
+          <h2>{singleArticle.title}</h2>
+          <h4>{singleArticle.author}</h4>
+          <p>{singleArticle.body}</p>
+          <h5>votes: {singleArticle.votes + votes}</h5>
+
+          <div>
+            <Button
+              variant="outlined"
+              onClick={() => {
+                incrementVotes(1);
+              }}
+            >
+              <AiFillLike className="btn-fill" />
+            </Button>
+            <Button
+              variant="outlined"
+              onClick={() => {
+                incrementVotes(-1);
+              }}
+            >
+              <AiFillDislike className="btn-fill" />
+            </Button>
+          </div>
+          <h5>
+            {singleArticle.topic} | {singleArticle.created_at}
+          </h5>
         </div>
-        <h5>
-          {singleArticle.topic} | {singleArticle.created_at}
-        </h5>
-        <Comments />
+        <Button
+          size="small"
+          variant="outlined"
+          onClick={() => {
+            setShowComments(true);
+          }}
+        >
+          show comments
+        </Button>
+        {showComments && <Comments />}
+        <Button
+          size="small"
+          variant="text"
+          onClick={() => {
+            setShowComments(false);
+          }}
+        >
+          hide comments
+        </Button>
       </section>
     );
   }

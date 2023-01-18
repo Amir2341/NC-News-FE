@@ -12,8 +12,19 @@
   padding-top: 1.5rem;
 }
 
+.title-container {
+  display: flex;
+  flex-direction: column-reverse;
+}
+
+.login-container {
+  display: flex;
+  align-items: flex-end;
+  position: relative;
+}
+
 img {
-  width: 100px;
+  width: 50px;
 }
 
 .articles__container {
@@ -25,11 +36,25 @@ img {
 }
 
 .articles__container-select {
-  padding: 1rem;
+  padding: 0.8;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
+.articles {
+  margin: 0 -5px;
+}
+.articles:after {
+  content: "";
+  display: table;
+  clear: both;
+}
 .articles-card {
-  border: 1px solid black;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); /* this adds the "card" effect */
+  padding: 16px;
+  text-align: center;
+  background-color: #f1f1f1;
 }
 
 .articles-list {
@@ -37,6 +62,7 @@ img {
   grid-template-columns: minmax(25rem, 5rem);
   list-style: none;
   padding-right: 2rem;
+  margin: 2px solid black;
 }
 
 /* CSS */
@@ -83,6 +109,13 @@ img {
 
 .btn-fill {
   align-items: center;
+}
+
+.article__card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); /* this adds the "card" effect */
+  padding: 16px;
+  text-align: center;
+  background-color: #f1f1f1;
 }
 
 .like-btn {
@@ -216,6 +249,72 @@ img {
   outline: 0;
 }
 
+.btn-showcomments {
+  background-color: #fff;
+  border: 1px solid #d5d9d9;
+  border-radius: 8px;
+  box-shadow: rgba(213, 217, 217, 0.5) 0 2px 5px 0;
+  box-sizing: border-box;
+  color: #0f1111;
+  cursor: pointer;
+  display: inline-block;
+  font-family: "Amazon Ember", sans-serif;
+  font-size: 13px;
+  line-height: 29px;
+  padding: 0 10px 0 11px;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: middle;
+  width: 120px;
+}
+
+.btn-showcomments:hover {
+  background-color: #f7fafa;
+}
+
+.btn-showcomments:focus {
+  border-color: #008296;
+  box-shadow: rgba(213, 217, 217, 0.5) 0 2px 5px 0;
+  outline: 0;
+}
+
+.btn-hidecomments {
+  background-color: #fff;
+  border: 1px solid #d5d9d9;
+  border-radius: 8px;
+  box-shadow: rgba(213, 217, 217, 0.5) 0 2px 5px 0;
+  box-sizing: border-box;
+  color: #0f1111;
+  cursor: pointer;
+  display: inline-block;
+  font-family: "Amazon Ember", sans-serif;
+  font-size: 13px;
+  line-height: 29px;
+  padding: 0 10px 0 11px;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: middle;
+  width: 120px;
+}
+
+.btn-hidecomments:hover {
+  background-color: #f7fafa;
+}
+
+.btn-hidecomments:focus {
+  border-color: #008296;
+  box-shadow: rgba(213, 217, 217, 0.5) 0 2px 5px 0;
+  outline: 0;
+}
+
 .back-btn {
   background-color: #fff;
   border: 1px solid #d5d9d9;
@@ -290,6 +389,8 @@ img {
 
 @media screen and (max-width: 600px) {
   .articles__container {
-    padding-left: 7rem;
+    width: 100%;
+    padding: 7rem;
+    margin-bottom: 20px;
   }
 }
